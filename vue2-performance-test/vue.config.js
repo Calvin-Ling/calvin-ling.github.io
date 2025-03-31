@@ -1,6 +1,7 @@
 const path = require('path')
 
 module.exports = {
+  publicPath: '/vue2-performance-test/dist/',
   configureWebpack: {
     resolve: {
       alias: {
