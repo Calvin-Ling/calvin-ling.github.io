@@ -3,7 +3,7 @@
     <component-test
       :childCompLabel="'indicator-view'"
       :childCount="3000"
-      :structureImgSrc="'/img/1layer.png'"
+      :structureImgSrc="require('@assets/img/1layer.png')"
     />
   </div>
 </template>

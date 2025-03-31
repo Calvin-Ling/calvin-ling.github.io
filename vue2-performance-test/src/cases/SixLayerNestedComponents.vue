@@ -3,7 +3,7 @@
     <component-test
       :childCompLabel="'float-view'"
       :childCount="500"
-      :structureImgSrc="'/img/6layer.png'"
+      :structureImgSrc="require('@assets/img/6layer.png')"
     />
   </div>
 </template>

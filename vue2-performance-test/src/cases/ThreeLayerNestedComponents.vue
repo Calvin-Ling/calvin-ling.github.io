@@ -3,7 +3,7 @@
     <component-test
       :childCompLabel="'sx-portlet'"
       :childCount="1500"
-      :structureImgSrc="'/img/3layer.png'"
+      :structureImgSrc="require('@assets/img/3layer.png')"
     />
   </div>
 </template>
