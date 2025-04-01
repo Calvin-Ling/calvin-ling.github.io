@@ -34,7 +34,6 @@ export default {
   computed: {
     results() {
       return {
-        childCount: this.childCount,
         createdTime: this.createdTime,
         mountedTime: this.mountedTime
       }
@@ -54,7 +53,6 @@ export default {
       return this.sendLargeProps ? MockDataGenerator.generateAttrs() : {}
     },
     complete () {
-      console.log('Performance test complete', this.results)
       this.$emit('test-complete', this.results)
     }
   }

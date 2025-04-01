@@ -2,7 +2,7 @@
   <div id="portlet-like">
     <component-test
       :childCompLabel="'indicator-view'"
-      :childCount="3000"
+      :childCount="123 * 6"
       :structureImgSrc="require('@assets/img/1layer.png')"
     />
   </div>

@@ -1,6 +1,6 @@
 <template>
   <div id="component-test">
-    <h1>Vue 2.6.14 - Layout下一层{{childCount}}个组件性能测试，结构如下图</h1>
+    <h1>Vue 2.6.14 - Layout下一层{{inputCount}}个组件性能测试，结构如下图</h1>
     <img style="width:300px;" :src="structureImgSrc">
     <div class="controls">
       <button @click="runTest" :disabled="testing">开始测试（sendLargeProps={{sendLargeProps}}）</button>
@@ -10,6 +10,7 @@
       <button @click="toggleProps" :disabled="testing">
         {{ sendLargeProps ? '不传递大对象' : '传递大对象' }}
       </button>
+      <span>组件个数: <input :value="inputCount" @blur="onBlur"/></span>
     </div>
     
     <div v-if="testing" class="loading">测试中...</div>
@@ -22,7 +23,7 @@
     <browse-layout 
       v-if="showParent"
       :compLabel="childCompLabel"
-      :childCount="childCount"
+      :childCount="inputCount"
       :sendLargeProps="sendLargeProps"
       @test-complete="handleTestComplete"
     />
@@ -45,7 +46,8 @@ export default {
       results: null,
       startTestTime: 0,
       showParent: false,
-      sendLargeProps: false
+      sendLargeProps: false,
+      inputCount: this.childCount
     }
   },
   computed: {
@@ -71,15 +73,28 @@ export default {
     },
     toggleProps () {
       this.sendLargeProps = !this.sendLargeProps
+      this.showParent = false
     },
     handleTestComplete(results) {
-      this.results = results
-      this.results.startTestTime = this.startTestTime
-      this.results.totalCreateMountTime = this.results.mountedTime - this.startTestTime
-      const frames = this.childCount
-      const seconds = this.results.totalCreateMountTime / 1000
-      this.results.fps = Math.round(frames / seconds)
+      this.results = {
+        startTestTime: this.startTestTime,
+        ...results,
+        totalCreateMountTime: results.mountedTime - this.startTestTime
+      }
+      const decimals = 2
+      for (let key in this.results) {
+        this.results[key] = parseFloat(Math.round((this.results[key] + Number.EPSILON) * 10 ** decimals) / 10 ** decimals).toFixed(decimals) + ' ms'
+      }
       this.testing = false
+    },
+    onBlur (ev) {
+      let newVal = Number(ev.srcElement.value)
+      if (newVal % 1 === 0 && newVal < 50000) {
+        this.inputCount = newVal
+        this.showParent = false
+      } else {
+        ev.srcElement.value = this.inputCount
+      }
     }
   }
 }
