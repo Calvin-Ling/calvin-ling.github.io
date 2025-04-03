@@ -5,6 +5,7 @@
       <router-link to="/">6层父子组件性能测试</router-link> |
       <router-link to="/3layer">3层父子组件性能测试</router-link>
       <router-link to="/1layer">1层父子组件性能测试</router-link>
+      <span> 项目源代码：<a href="https://github.com/Calvin-Ling/calvin-ling.github.io/tree/main/vue2-performance-test">Git Repo</a></span>
     </nav>
     
     <!-- 路由出口 -->
