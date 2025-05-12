@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="module" src="./dist-component/sc-cross-frame-comp3.esm.js"></script>
+  </head>
+  <body>
+    <sc-cross-frame-comp3 label="attribute from template"></sc-cross-frame-comp3>
+    <script>
+      var comp = document.querySelector('sc-cross-frame-comp3');
+      const test = () => {
+        // setAttribute('label'), at the same time, update another props defined in vue3
+        comp.setAttribute('label', 'update by setAttribute');
+        comp.complexProp = {
+          content: 'update another props'
+        };
+        // the label update is not reflected in the component
+        setTimeout(() => {
+          console.log('setTimeout wait for the observer.');
+          console.assert(comp.label === 'update by setAttribute');
+        }, 0);
+      };
+      onload = () => {
+        console.log('onload');
+        test();
+      };
+    </script>
+  </body>
+</html>
